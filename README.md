@@ -1,6 +1,6 @@
 # MT-qp
 
-a php-msql-printer.
+a php-mysql-printer.
 
 Its made for printing mysql query using php to html table with advanced features.
 
@@ -19,6 +19,9 @@ You need : a working php project with phpmyadmin database.
 include("qp.php");
 
 ```
+copy the css contents to your style.css file.
+
+
 
 ### Code
 
@@ -52,6 +55,7 @@ $skiped_Column=array(""); $new_THs= array(); $new_TDs=array(); $form_Actions=arr
 qp($con,$query,$skiped_Column ,$new_THs,$new_TDs,$form_Actions,$form_Methods,$passed_Values);		
 ```
 Then just modify the "$query" variable 
+
 e.g : 
 ```
 $query = " SELECT * FROM customer where Name like 'MT' ";
@@ -81,11 +85,11 @@ $new_THs = array();            // if you want to add a buttons columns at the en
 $new_TDs = array();        // here you can type the new columns buttons values :   go to "Notic 48" 
                           // e.g :  $new_TDs = array("send","delete"); or $new_TDs = array(0,1); or  $new_TDs = array(); 
         -------------------------------------------------------                            
-$form_Actions = array();   // here you can set and buttons forms actions :  go to "Notic 49"
+$form_Actions = array();   // here you can set the buttons forms actions :  go to "Notic 49"
                               e.g : $form_Actions = array("","send.php"); 
         -------------------------------------------------------
 $form_Methods = array();    // here u can set the form methods :
-                                 // e.g :  $form_Methods =array("POST","GET"); or $form_Methods =array("",""); for self method.
+                                 // e.g :  $form_Methods =array("POST","GET"); .
         -------------------------------------------------------
 $passed_Values = array();       // since the buttons might direct you to other php pages, some times you need to pass a value.
                                //  e.g :  $passed_Values = array("2018"); or $passed_Values = array($value1,$value2); 
@@ -102,14 +106,14 @@ qp($con,$query,$skiped_Column ,$new_THs,$new_TDs,$form_Actions,$form_Methods,$pa
 
 Notic 45
 ```
-when you use "select * from" , you will allow your table column indexs to be stored in the form to be used later.
+when you use "select * from" , you will allow your table columns indexs to be stored in the form to be used later.
 if you select only few columns your referenced indexs will be based on your select. go to "Notic 50"
 ```
 
 
 Notic 46
 ```
-this array should always contion double quotation, cuase the printer search using it before hiding the columns : 
+this array should always contion double quotation, because the printer search using it before hiding the columns : 
 $skiped_Column = array(""); 
 if you renamed your columns in the select statement, you should type the new name in the $skiped_Column .
 e.g : " select id as user_id from" then $skiped_Column should be :
@@ -128,7 +132,7 @@ Notic 48
 ```
 for setting the buttons values for each row using  $new_TDs = array(); 
 you can put any string : $new_TDs = array("send");
-or copy an column by index :  $new_TDs = array(0);  if "id" has index 0 the buttons values will be the ids.
+or copy an column by index :  $new_TDs = array(0);  if "id" has index 0 the buttons values will be the id value.
 or leave it empty :  $new_TDs = array();   this will copy the "$new_THs" the column_head value
 ```
 
@@ -146,7 +150,7 @@ There is tow variables passed throgh the form :
 this variable store all the value of each row in the same index of the orginal select.
 e.g : 
 "select id , username from "
-the variable can be used like this :
+then values can be returned like this :
 $arrayall = $_GET['varall'];
 $id = $array[0];
 $username = $array[1];
@@ -169,7 +173,7 @@ in the css you can type :
 Notic & Issue 52
 ```
 if you used the printer with POST methed then used it again in action page you will lose the previous values.
-you might need to pass it again
+you might need to pass it again.
 ```
 ## Preview
 

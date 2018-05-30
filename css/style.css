@@ -1,0 +1,66 @@
+.printerform {
+  margin-left:0px;
+  padding:0px;
+  height:100%;
+  width: 100%;
+}
+
+.Contract{              	    /*  $new_THs = array("Contract","Delete" );  */ 
+    background-color: #00ff80;
+    width: 100%;
+    height:100%;
+	border:1px solid black; 
+    appearance: none;
+    margin:0px;
+    cursor: pointer;
+}
+
+.Delete{					  /*  $new_THs = array("Contract","Delete" );  */ 
+    background-color: #ff0040;
+    width: 100%;
+    height:100%;
+	border:1px solid black; 
+    appearance: none;
+    margin:0px;
+    cursor: pointer;
+}	
+
+.table1{
+  border-spacing: 0px;
+  border-collapse:collapse;
+  border:1px solid black;  
+  position:relative;
+  padding 10px;
+  margin:50px;
+}
+
+th {
+	background-color: rgba(128,0,255,1);
+	text-align:center;
+	vertical-align:center;
+	color:black;
+	white-space:nowrap;
+	width:100px;
+	height:30px;
+	max-width:500px;
+	max-height:30px;
+	border-spacing: 0px;
+    border-collapse:collapse;  
+    border:2px solid black;
+}
+
+td {
+     background-color: rgba(191,0,255,1);
+     border:1px solid black;
+     text-align:center;
+     vertical-align:center;
+     color:white;
+     width:100px;
+     height:30px;
+     max-width:900px;
+     max-height:30px;
+     word-wrap:break-word;
+     border-spacing: 0px;
+    border-collapse:collapse;  
+    border:1px solid black; 
+}

@@ -1,7 +1,7 @@
 # MT-qp
 
 a php-msql-printer.
-printing mysql query using php to html table with advance featcher.
+printing mysql query using php to html table with advanced features.
 
 ## Getting Started
 
@@ -33,7 +33,7 @@ $skiped_Column = array("");
 $new_THs = array();
 $new_TDs = array();
 $form_Actions = array();
-$form_Methods ="POST";
+$form_Methods = array("POST"); 
 $passed_Values = array();
 
 qp($con,$query,$skiped_Column ,$new_THs,$new_TDs,$form_Actions,$form_Methods,$passed_Values);															
@@ -43,21 +43,109 @@ qp($con,$query,$skiped_Column ,$new_THs,$new_TDs,$form_Actions,$form_Methods,$pa
 
 ### Simple Usage
 
-if you want to print your table simply without any featcher 
+If you want to print simple table without any features :
+
+copy the next code :
 
 ```
 $query = "";
-$skiped_Column = array("");
-$new_THs = array();
-$new_TDs = array();
-$form_Actions = array();
-$form_Methods ="POST";
-$passed_Values = array();
+
+$skiped_Column=array(""); $new_THs= array(); $new_TDs=array(); $form_Actions=array(); $form_Methods=array(); $passed_Values=array(); 
 
 qp($con,$query,$skiped_Column ,$new_THs,$new_TDs,$form_Actions,$form_Methods,$passed_Values);		
 ```
+Then just modify the "$query" variable 
+e.g : 
+```
+$query = " SELECT * FROM customer where Name like 'MT' ";
+```
+and make sure your database connection variable name is:
+```
+$con 
+```
+or use yours.
 
 
+### Advance Usage
+
+```
+$query = "";                  // the query variable , try to use " select * from" .  go to "Notic 45" 
+        -------------------------------------------------------
+$skiped_Column = array("");         // if you want to hide some column, type the columns names here :    go to "Notic 46" 
+                                  //  e.g :  $skiped_Column = array("ID","username");     
+        -------------------------------------------------------
+$new_THs = array();            // if you want to add a buttons columns at the end of the table, you can type column_head_name here:
+                              // e.g :  $new_THs = array("delete","send"); 
+                             //  every index you add will insert new column.  go to "Notic 47" 
+        -------------------------------------------------------                               
+$new_TDs = array();        // here you can type the new columns buttons values :   go to "Notic 48" 
+                          // e.g :  $new_TDs = array("send","delete"); or $new_TDs = array(0,1); or  $new_TDs = array(); 
+        -------------------------------------------------------                            
+$form_Actions = array();   // here you can set and buttons forms actions :  go to "Notic 49"
+                              e.g : $form_Actions = array("","send.php"); 
+        -------------------------------------------------------
+$form_Methods = array();    // here u can set the form methods :
+                                 // e.g :  $form_Methods =array("POST","GET"); or $form_Methods =array("",""); for self method.
+        -------------------------------------------------------
+$passed_Values = array();       // since the buttons might direct you to other php pages, some times you need to pass a value.
+                               //  e.g :  $passed_Values = array("2018"); or $passed_Values = array($value1,$value2); 
+                              // "Notic 50" and "Notic & Issue 51"
+        -------------------------------------------------------
+qp($con,$query,$skiped_Column ,$new_THs,$new_TDs,$form_Actions,$form_Methods,$passed_Values);		
+```
+
+## Notics
+
+
+Notic 45
+```
+when you use "select * from" , you will allow your table column indexs to be stored in the form to be used later.
+if you select only few columns your referenced indexs will be based on your select. go to "Notic 50"
+```
+Notic 46
+```
+this array should always contion double quotation, cuase the printer search using it before hiding the columns : 
+$skiped_Column = array(""); 
+if you renamed your columns in the select statement, you should type the new name in the $skiped_Column .
+e.g : " select id as user_id from" then $skiped_Column should be :
+$skiped_Column = array("user_id"); 
+```
+Notic 47
+```
+$new_THs = array();   and   $new_TDs = array();  and   $form_Actions = array();   and $form_Methods = array();  must have the same size,
+otherwise it wont print the new columns.
+```
+Notic 48
+```
+for setting the buttons values for each row using  $new_TDs = array(); 
+you can put any string : $new_TDs = array("send");
+or copy an column by index :  $new_TDs = array(0);  if "id" has index 0 the buttons values will be the ids.
+or leave it empty :  $new_TDs = array();   this will copy the "$new_THs" the column_head value
+```
+Notic 49
+```
+the form action can be empty "" : $form_Actions = array(""); for targting same php. 
+```
+Notic 50
+```
+There is tow variables passed throgh the form :
+1- $_POST['varall']; or $_GET['varall'];
+this variable store all the value of each row in the same index of the orginal select.
+e.g : 
+"select id , username from "
+the variable can be used like this :
+$arrayall = $_GET['varall'];
+$id = $array[0];
+$username = $array[1];
+
+2- $_POST['varpass']; or $_GET['varpass'];
+this variable store your passed values and index it as its. 
+```
+Notic & Issue 51
+```
+if you used the printer with POST methed then used it again in action page you will lose the previous values.
+you might need to pass it again
+```
 
 
 ## Version
@@ -66,49 +154,13 @@ MT-qp -0.3
 
 ## Authors
 
-* **MTriple** - *Initial work* - [MTriple](https://github.com/mtriple)
+* **MTriple**- [profile](https://github.com/mtriple)
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
 ## Next 
 
 Please if you have any idea to make this printer better share it ..
 
-
-
-
-
- 
- 
- 
- ------------------  
- 
-   this printer will print the query normaly and add new columns as many as you want if you want your arrays incrased, columns head will be named in array1 
-   #Notice: that all array1 and array2 and array3 must have same size. 
-   each record will have form submit button that will direct you to the targeted php file in array3.
-   form submit button in each record will copy three things :
-   1- one value based on what reference you pick in array2 this will be stored in "varone"
-   2-all values in the row as an array with same table index and store it in "varall"
-   3-array5 values as its and store it in "varpass"
-   #Notice: that array2 must have the index of your table heads that you want to copy.
-   #Notice: form submit button class is "printerb".
-   its better if you make array2 takes the "id" or primary key index for all columns e.g array(0,0,0 etc..) so you can reference your 
-   commands to id only.
-   # Notice: var999 is the variable where form store the copied record.
-   
- 
- 
- 
-  
- usage :
- a-   qpw($con, $q, $array1, $array2, $array3,$array4,$array5);
- b-   $array1 is the new table-head as an array  e.g :  $array1 = array("head 1", "head 2");
- c-   $array2 is the referenced column as an array  e.g :  $array2 = array(0, 1); means: copy the value at column of index 0 to "head 1"
- d-   $array3 is the targets for (form-get-method) s an array  e.g :  $array2 = array("send.php", "delete.php");
- e-   you can retrieve the copyied record with simple code at the targeted php file e.g : $whatever = $_GET['var999'];
- f-   d
- 
-
- 

@@ -1,19 +1,16 @@
 # php-msql-printer
-printing mysql query using php to html tags.
+printing mysql query using php to html table.
 
 usage :
 
 1- copy the files to ur project.
-2-include the printer that you want:
-  a-include("qp.php"); normal printer.
-  b-include("qpw.php"); advanced printer.
+2-include the printer int your file:
+ "include("qp.php");"
   -----------------
-3-normal printer usage :
- a-  qp($con, $q );
- b-  it takes 2 parameters first the database connection the second is the query as text.
- c- e.g : 
- $qu1 =" SELECT * FROM `customer` where status='false'";
- qp($con, $qu1 );
+# usage :
+ 
+ 
+ 
  
  ------------------  
 4- advanced printer 
